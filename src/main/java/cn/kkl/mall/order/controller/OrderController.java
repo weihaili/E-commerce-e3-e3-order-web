@@ -55,7 +55,9 @@ public class OrderController {
 		E3Result e3Result = orderSerivce.createOrder(orderInfo);
 		if (e3Result.getStatus()==200) {
 			String orderId=(String) e3Result.getData();
+			cartService.deleteCartItemAll(user.getId());
 			request.setAttribute("orderId", orderId);
+			request.setAttribute("payment", orderInfo.getPayment());
 			
 		}
 		return "success";
